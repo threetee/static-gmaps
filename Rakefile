@@ -31,8 +31,8 @@ rescue LoadError
   exit
 end
 
-Hoe.new('static-gmaps', StaticGmaps::version) do |p|
-  p.rubyforge_name = 'static-gmaps'
+Hoe.new('threetee-static-gmaps', StaticGmaps::version) do |p|
+  p.rubyforge_name = 'threetee-static-gmaps'
   p.author = 'Daniel Mattes'
   p.email = 'daniel.mattes@gmx.de'
   p.summary = 'Provides an interface to the Google Static Maps API.'

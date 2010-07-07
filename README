@@ -1,11 +1,13 @@
 = StaticGmaps
 
-* http://github.com/dmattes/static-gmaps/
+* http://github.com/threetee/static-gmaps/
 
 == DESCRIPTION:
 
 Provides an interface to the Google Static Maps API.
-Original Version from John Wulff, modified by Daniel Mattes
+Original Version from John Wulff, modified by Daniel Mattes and Eric Dennis
+
+threetee's version sets the default image format to 'png'.
 
 == FEATURES/PROBLEMS:
 

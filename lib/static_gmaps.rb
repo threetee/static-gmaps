@@ -23,7 +23,7 @@
 require 'net/http'
 
 module StaticGmaps 
-  @@version = '0.0.4' 
+  @@version = '0.0.5' 
   
   #map  
   @@maximum_url_size = 1978
@@ -31,6 +31,7 @@ module StaticGmaps
   @@default_center   = [ 0, 0 ]
   @@default_zoom     = 1
   @@default_size     = [ 500, 400 ]
+  @@default_format   = 'png'
   @@default_map_type = :roadmap
   @@default_key      = 'ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA'
   
@@ -44,7 +45,7 @@ module StaticGmaps
   @@valid_colors            = [ :red, :green, :blue ]
   @@valid_alpha_characters  = [ :a, :b, :c, :d, :e, :f, :g, :h, :i, :j, :k, :l, :m, :n, :o, :p, :q, :r, :s, :t, :u, :v, :w, :x, :y, :z ]    
   
-  [:version, :maximum_url_size, :maximum_markers, :default_center, :default_zoom, :default_size, :default_map_type, :default_key,
+  [:version, :maximum_url_size, :maximum_markers, :default_center, :default_zoom, :default_size, :default_format, :default_map_type, :default_key,
   :default_latitude, :default_longitude, :default_color, :default_alpha_character, :valid_colors, :valid_alpha_characters].each do |sym|
     class_eval <<-EOS
       def self.#{sym}
@@ -63,6 +64,7 @@ module StaticGmaps
     attr_accessor :center,
                   :zoom,
                   :size,
+                  :format,
                   :map_type,
                   :key,
                   :markers
@@ -71,6 +73,7 @@ module StaticGmaps
       self.center   = options[:center]
       self.zoom     = options[:zoom]     || StaticGmaps::default_zoom
       self.size     = options[:size]     || StaticGmaps::default_size
+      self.format   = options[:format]   || StaticGmaps::default_format
       self.map_type = options[:map_type] || StaticGmaps::default_map_type
       self.key      = options[:key]      || StaticGmaps::default_key
       self.markers  = options[:markers]  || [ ]
@@ -100,6 +103,7 @@ module StaticGmaps
       raise "Google will not display more than #{StaticGmaps::maximum_markers} markers." if markers && markers.size > StaticGmaps::maximum_markers
       parameters = {}
       parameters[:size]     = "#{size[0]}x#{size[1]}"
+      parameters[:format]   = "#{format}"
       parameters[:key]      = "#{key}"
       parameters[:map_type] = "#{map_type}"               if map_type
       parameters[:center]   = "#{center[0]},#{center[1]}" if center

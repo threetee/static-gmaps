@@ -13,6 +13,7 @@ describe StaticGmaps do
     # no default center, because of auto adjustment
     it 'should set zoom to default'     do @map.zoom.should     == StaticGmaps::default_zoom end
     it 'should set size to default'     do @map.size.should     == StaticGmaps::default_size end
+    it 'should set format to default'   do @map.format.should   == StaticGmaps::default_format end
     it 'should set map_type to default' do @map.map_type.should == StaticGmaps::default_map_type end
     it 'should set key to default'      do @map.key.should      == StaticGmaps::default_key end
   end
@@ -23,6 +24,7 @@ describe StaticGmaps do
       @map = StaticGmaps::Map.new :center   => [ 40.714728, -73.998672 ],
                                   :zoom     => 12,
                                   :size     => [ 500, 400 ],
+                                  :format   => 'png',
                                   :map_type => :roadmap,
                                   :key      => 'ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA',
                                   :markers  => [ @marker ]
@@ -31,6 +33,7 @@ describe StaticGmaps do
     it 'should set center'   do @map.center.should   == [ 40.714728, -73.998672 ] end
     it 'should set zoom'     do @map.zoom.should     == 12 end
     it 'should set size'     do @map.size.should     == [ 500, 400 ] end
+    it 'should set format'   do @map.format.should   == 'png' end
     it 'should set map_type' do @map.map_type.should == :roadmap end
     it 'should set key'      do @map.key.should      == 'ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA' end
     it 'should set markers'  do @map.markers.should  == [ @marker ] end
@@ -39,7 +42,7 @@ describe StaticGmaps do
   describe Map, 'with default attributes' do
     before(:each) do @map = StaticGmaps::Map.new end
     
-    it 'should have a url'    do @map.url.should      == 'http://maps.google.com/staticmap?center=0,0&key=ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA&map_type=roadmap&size=500x400&zoom=1' end
+    it 'should have a url'    do @map.url.should      == 'http://maps.google.com/staticmap?center=0,0&format=png&key=ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA&map_type=roadmap&size=500x400&zoom=1' end
     it 'should have a width'  do @map.width.should    == 500 end
     it 'should have a height' do @map.height.should   == 400 end
     #it 'should respond to to_blob with an image' do @map.to_blob.should  == File.read(STATIC_GOOGLE_MAP_DEFAULT_PARAMETERS_TEST_IMAGE_PATH) end
